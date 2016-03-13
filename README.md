@@ -1,2 +1,2 @@
 # GuessingGame
-HTMl/CSS
+HTML/CSS
