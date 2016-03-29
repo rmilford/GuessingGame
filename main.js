@@ -7,7 +7,7 @@ var numOfGuessesLeft = 5;
 var newRandomNumber = function() {
 	numToGuess=Math.floor(100*Math.random()+1);
 	alert("numToGuess: " + numToGuess);
-}
+};
 
 //step 3. 
 function getValidInput() {
@@ -18,14 +18,18 @@ function getValidInput() {
 		alert("Please enter a number.");
 		return NaN;
 	}
+
+	else if (number === typeof NaN){
+		alert("Please enter a valid number.");
+	}
 }
 //step 2.
-$("#submit").click(function(){
+$("#submit").click(function(){//step 5/5b.
 	if (numOfGuessesLeft > 0) {
 	var num1 = document.getElementById("input-1").value;
-	var num2 = numToGuess - num1;
+	var num2 = Math.abs(numToGuess - num1);
 	alert(numToGuess + "  " + num1 + "  " + num2)
-//step 5/5b.
+//step 4.
 	if (num2 ===0 ){
 		alert("Winner, Winner, Chicken Dinner!");
 	}
@@ -42,14 +46,44 @@ $("#submit").click(function(){
 		alert("You are very cold!");
 	}
 
-//step 4.
-
-numOfGuessesLeft--;	
-alert("You have " + numOfGuessesLeft + " guess(es) left.");
-}
-if(numOfGuessesLeft === 0){
+//step 7.
+	numOfGuessesLeft--;	
+	alert("You have " + numOfGuessesLeft + " guess(es) left.");
+	}
+	if(numOfGuessesLeft === 0){
 	alert("You Lose!");
 }
+});
+
+//step 6. 
+function Clear()
+{    
+   document.getElementById("input-1").value= "";
+ };
+
+//step 8. (hint button)
+
+$("#submit3").click(function(){
+		var lowerHint=Math.floor(20*Math.random()+1);
+		var upperHint=Math.floor(20*Math.random()+1);
+		var newHintBig = numToGuess + upperHint; 
+			if(newHintBig > 100){
+				newHintBig = 100
+			}
+		var newHintSmall = numToGuess - lowerHint;
+			if(newHintSmall < 0){
+				newHintSmall = 0
+			}
+		alert("Your answer is between the number " + newHintSmall + "-" + newHintBig);
+
+});
+
+//step 10. (play again button)
+
+$("#submit2").click(function(){
+	newRandomNumber();
+	numOfGuessesLeft = 5;
+	Clear();
 });
 
 
@@ -66,7 +100,7 @@ ______________
 		warm < 20
 		cold < 40
 		very cold > 41
-6. continue to clear the text input after each guess 
+6. continue to clear the text input after each game 
 7. count down the remaining guesses left for the user as they continue to play
 8. let the user take a hint by using the hint button
 	8b. the hint button will tell the user either "guess higher" or "guess lower" based on how close the user is to the computer guess.
