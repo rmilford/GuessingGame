@@ -6,7 +6,9 @@ var numOfGuessesLeft = 5;
 
 var newRandomNumber = function() {
 	numToGuess=Math.floor(100*Math.random()+1);
-	alert("numToGuess: " + numToGuess);
+	//document.getElementById("user_input").innerHTML="numToGuess: " + numToGuess};
+	document.getElementById("user_input").innerHTML = "You have "+numOfGuessesLeft+" guess(es)";
+	//alert("numToGuess: " + numToGuess);
 };
 
 //step 3. 
@@ -28,27 +30,46 @@ $("#submit").click(function(){//step 5/5b.
 	if (numOfGuessesLeft > 0) {
 	var num1 = document.getElementById("input-1").value;
 	var num2 = Math.abs(numToGuess - num1);
-	alert(numToGuess + "  " + num1 + "  " + num2)
+	//alert(numToGuess + "  " + num1 + "  " + num2)
 //step 4.
 	if (num2 ===0 ){
-		alert("Winner, Winner, Chicken Dinner!");
+		document.getElementById("user_input").innerHTML = "Winner, Winner, Chicken Dinner!";
+		document.getElementById("youAre").innerHTML = "";
+		document.getElementById("guessDiv").innerHTML = "";
+
+			$(document).ready(function() {
+	    	var f = document.getElementById('user_input');
+	    	setInterval(function() {
+	        f.style.display = (f.style.display == 'none' ? '' : 'none');
+	    	}, 1000);
+
+			});
+
+		
+			return;
 	}
 	else if(num2 < 10){
-		alert("You are hot!");
+		document.getElementById("youAre").innerHTML = "You are hot!";
+		//alert("You are hot!");
 	}
 	else if(num2 < 20){
-		alert("You are warm!");
+		document.getElementById("youAre").innerHTML = "You are warm!";
+		//alert("You are warm!");
 	}
 	else if(num2 < 40){
-		alert("You are cold.");
+		document.getElementById("youAre").innerHTML = "You are cold.";
+		//alert("You are cold.");
 	}
 	else{
-		alert("You are very cold!");
+		document.getElementById("youAre").innerHTML = "You are very cold!";
+		//alert("You are very cold!");
 	}
 
 //step 7.
 	numOfGuessesLeft--;	
-	alert("You have " + numOfGuessesLeft + " guess(es) left.");
+	document.getElementById("guessDiv").innerHTML += num1 + " ";
+	document.getElementById("user_input").innerHTML = "You have "+numOfGuessesLeft+" guess(es)";
+	//alert("You have " + numOfGuessesLeft + " guess(es) left.");
 	}
 	if(numOfGuessesLeft === 0){
 	alert("You Lose!");
@@ -74,23 +95,32 @@ $("#submit3").click(function(){
 			if(newHintSmall < 0){
 				newHintSmall = 0
 			}
-		alert("Your answer is between the number " + newHintSmall + "-" + newHintBig);
+		document.getElementById("youAre").innerHTML = "Your answer is between the number " + newHintSmall + "-" + newHintBig;
 
 });
 
 //step 10. (play again button)
 
 $("#submit2").click(function(){
-	newRandomNumber();
-	numOfGuessesLeft = 5;
-	Clear();
+	// newRandomNumber();
+	// numOfGuessesLeft = 5;
+	// Clear();
+	location.reload();
 });
+
+
+//returns submit button by hitting enter
+$("#input-1").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#submit").click();
+    }
+});
+
 
 
 /*
 Guessing Game Steps
 ______________
-
 1. when the page loads, the computer should pick a random number (1-100)
 2. then the user should pick their number by clicking the guess button
 3. if the user does not enter a valid number, alert "Please enter a number".
@@ -112,5 +142,6 @@ ______________
 	10b. have the computer repick a random number and
 	10c. clear all text on the page.
 */
+
 
 
